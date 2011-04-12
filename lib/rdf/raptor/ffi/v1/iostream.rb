@@ -41,7 +41,10 @@ module RDF::Raptor::FFI::V1
     # @param  [FFI::Pointer] ptr
     # @return [void]
     def self.release(ptr)
-      V1.raptor_free_iostream(ptr)
+      # This is segfaulting in passenger sometimes for reasons not yet clearly
+      # understood. But we run passenger prefork, so this is a workaround for
+      # now.
+      #V1.raptor_free_iostream(ptr)
     end
   end # IOStream
 end # RDF::Raptor::FFI::V1
